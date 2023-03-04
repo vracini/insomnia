@@ -7,8 +7,6 @@ import coreLogo from '../images/insomnia-logo.svg';
 import { selectIsLoggedIn } from '../redux/selectors';
 import { Breadcrumb, BreadcrumbProps } from './breadcrumb';
 import { SettingsButton } from './buttons/settings-button';
-import { AccountDropdownButton } from './dropdowns/account-dropdown/account-dropdown';
-import { GitHubStarsButton } from './github-stars-button';
 
 const LogoWrapper = styled.div({
   display: 'flex',
@@ -84,7 +82,6 @@ export const AppHeader: FC<AppHeaderProps> = ({
         <Fragment>
           <LogoWrapper>
             <img style={{ zIndex: 1 }} src={coreLogo} alt="Insomnia" width="28" height="28" />
-            { !isLoggedIn ? <GitHubStarsButton /> : null }
           </LogoWrapper>
           <Breadcrumb {...breadcrumbProps} />
         </Fragment>
@@ -94,7 +91,6 @@ export const AppHeader: FC<AppHeaderProps> = ({
         <Fragment>
           {gridRight}
           <SettingsButton />
-          <AccountDropdownButton />
         </Fragment>
       }
     />

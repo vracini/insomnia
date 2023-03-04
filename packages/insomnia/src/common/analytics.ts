@@ -33,23 +33,7 @@ const getDeviceId = async () => {
 };
 
 const sendSegment = async function sendSegment<T extends 'track' | 'page'>(segmentType: T, options: Parameters<Analytics[T]>[0]) {
-  try {
-    const anonymousId = await getDeviceId() ?? undefined;
-    const userId = getAccountId();
-    const context = {
-      app: { name: getProductName(), version: getAppVersion() },
-      os: { name: _getOsName(), version: process.getSystemVersion() },
-    };
-    // HACK: TypeScript isn't capable (yet) of correlating Analytics[T] here with Parameters<Analytics[T]> in the arguments. Technically, the typing is correct here, TypeScript is just unable to check it.
-    // See related issue microsoft/TypeScript#30581
-    segmentClient?.[segmentType]({ ...options as {event: string}, context, anonymousId, userId }, error => {
-      if (error) {
-        console.warn('[analytics] Error sending segment event', error);
-      }
-    });
-  } catch (error: unknown) {
-    console.warn('[analytics] Unexpected error while sending segment event', error);
-  }
+
 };
 
 export enum SegmentEvent {

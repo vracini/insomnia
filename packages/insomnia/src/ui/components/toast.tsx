@@ -110,50 +110,7 @@ export class Toast extends PureComponent<{}, State> {
   }
 
   async _checkForNotifications() {
-    // If there is a notification open, skip check
-    if (this.state.notification) {
-      return;
-    }
-
-    const stats = await models.stats.get();
-    const {
-      allowNotificationRequests,
-      disablePaidFeatureAds,
-      disableUpdateNotification,
-      updateAutomatically,
-      updateChannel,
-    } = await models.settings.getOrCreate();
-
-    if (!allowNotificationRequests) {
-      // if the user has specifically said they don't want to send notification requests, then exit early
-      return;
-    }
-
-    let notification: ToastNotification | null = null;
-
-    // Try fetching user notification
-    try {
-      const data = {
-        app: getAppId(),
-        autoUpdatesDisabled: !updateAutomatically,
-        disablePaidFeatureAds,
-        disableUpdateNotification,
-        firstLaunch: stats.created,
-        launches: stats.launches, // Used for account verification notifications
-        platform: getAppPlatform(), // Used for CTAs / Informational notifications
-        updateChannel,
-        updatesNotSupported: !updatesSupported(),
-        version: getAppVersion(),
-      };
-      const notificationOrEmpty = await fetch.post<ToastNotification>('/notification', data, session.getCurrentSessionId());
-      if (notificationOrEmpty && typeof notificationOrEmpty !== 'string') {
-        notification = notificationOrEmpty;
-      }
-    } catch (err) {
-      console.warn('[toast] Failed to fetch user notifications', err);
-    }
-
-    this._handleNotification(notification);
+    return;
   }
 
   _loadSeen() {

@@ -8,7 +8,6 @@ import { selectSettings } from '../../redux/selectors';
 import { type ModalHandle, Modal, ModalProps } from '../base/modal';
 import { ModalBody } from '../base/modal-body';
 import { ModalHeader } from '../base/modal-header';
-import { Account } from '../settings/account';
 import { General } from '../settings/general';
 import { ImportExport } from '../settings/import-export';
 import { Plugins } from '../settings/plugins';
@@ -66,9 +65,6 @@ export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props,
               <button value="Shortcuts">Keyboard</button>
             </Tab>
             <Tab tabIndex="-1">
-              <button value="Account">Account</button>
-            </Tab>
-            <Tab tabIndex="-1">
               <button value="Plugins">Plugins</button>
             </Tab>
           </TabList>
@@ -83,9 +79,6 @@ export const SettingsModal = forwardRef<SettingsModalHandle, ModalProps>((props,
           </TabPanel>
           <TabPanel className="react-tabs__tab-panel pad scrollable">
             <Shortcuts />
-          </TabPanel>
-          <TabPanel className="react-tabs__tab-panel pad scrollable">
-            <Account />
           </TabPanel>
           <TabPanel className="react-tabs__tab-panel pad scrollable">
             <Plugins settings={settings} />
